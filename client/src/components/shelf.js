@@ -4,17 +4,24 @@ class Shelf extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items = [
+      items: [
         'shampoo',
         'chocolate',
       ]
     }
+    this.addItem = this.addItem.bind(this)
+  }
+
+  addItem = (item) => {
+    console.log('im clicked', item)
+    this.props.addToCart(item)
   }
 
   render() {
     const Items = this.state.items.map(
-      (item, idx) => <li key={idx}><button>[+]</button>{item}</li>
-    )
+      (item, idx) => {
+        return <li key={idx}><button onClick={ () => this.addItem(item) }>[+]</button>{item}</li>
+      })
     return (
       <div className="Shelf">
           <div>

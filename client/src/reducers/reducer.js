@@ -1,12 +1,18 @@
-const initialState = {}
+const initialState = {
+  items: []
+}
+
 export default(state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
     case 'add':
+      let items = [ ...state.items, action.item ]
+      console.log('adding items reducer', items)
       return {
         ...state,
-        action.item
+        items
       }
     default:
+      console.log(state)
       return state
   }
 }

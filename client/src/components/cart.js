@@ -8,18 +8,22 @@ import Shelf from './shelf'
 class Cart extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      items: []
+    }
   }
+
   render() {
+    const cartItems = this.props.items.map((item, idx) => {
+      return <li key={idx}>{item}</li>
+    })
     return (
-      const Items = this.props.cart.map((item, idx) => {
-        return <li key={idx}>{item}</li>
-      })
       <div className="Cart">
           <div>
             <Shelf addToCart={ this.props.actions.addToCart }/>
             <h2>Shopping Bag</h2>
             <ol>
-              { Items }
+              { cartItems }
             </ol>
           </div>
       </div>
@@ -28,14 +32,15 @@ class Cart extends Component {
 }
 
 function mapStateToProps(state, props) {
+  console.log('state', state)
   return {
-    items: state.items
+    items: state.reducer.items
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    action: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
   }
 }
 
