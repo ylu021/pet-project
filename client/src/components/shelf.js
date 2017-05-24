@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-// import './Shelf.css';
 
 class Shelf extends Component {
   constructor(props) {

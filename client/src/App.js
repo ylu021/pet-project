@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Cart from './components/cart'
+
 class App extends Component {
   state = { users: [] }
 
@@ -22,6 +24,8 @@ class App extends Component {
               })
             }
           </ul>
+          <h1>Cart</h1>
+          <Cart />
       </div>
     );
   }
