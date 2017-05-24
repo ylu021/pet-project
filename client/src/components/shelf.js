@@ -18,7 +18,7 @@ class Shelf extends Component {
       (item, idx) => <li key={idx}><button>[+]</button>{item}</li>
     )
     return (
-      <div className="App">
+      <div className="Shelf">
           <div>
             <h2>Shelf</h2>
             <ul>{ Items }</ul>
@@ -28,4 +28,4 @@ class Shelf extends Component {
   }
 }
 
-export default App;
+export default Shelf;
