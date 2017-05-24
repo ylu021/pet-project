@@ -5,3 +5,5 @@
 3. modify client's package.json and add "proxy": "http://localhost:3001".
 
 > what is proxy? This works as a redirect to any React app request that are not static asset. A good place to indicate the server url
+
+Next step, follow tutorial and make this http://www.eloquentwebapp.com/instagram-app-node-react-redux/
