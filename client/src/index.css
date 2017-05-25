@@ -79,6 +79,35 @@ a {
   align-items: center;
 }
 
+.battle-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.battle-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+}
+
+.battle-label {
+  text-align: center;
+  font-size: larger;
+  font-weight: 200;
+}
+
+.username-input {
+  border-radius: 3px;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid rgba(0,0,0,0.43);
+  font-size: medium;
+  width: 80%;
+}
+
 .btn {
   display: block;
   width: 200px;
