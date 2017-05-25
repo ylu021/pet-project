@@ -1,26 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import api from '../utils/api'
+
 const langs = ['All', 'JS', 'Ruby', 'Java', 'Python', 'HTML', 'CSS']
 
 class Popular extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedLang: 'All'
+      selectedLang: 'All',
+      repos: null
     }
+  }
+
+  componentDidMount() {
+    // initial call
+    this.fetchRepos(this.state.selectedLang)
+  }
+
+  fetchRepos = (lang) => {
+    api.fetchPopRepos(lang).then((repos) => {
+      console.log(repos)
+      this.setState({
+        repos
+      })
+    })
   }
 
   updateLang = (lang) => (e) => {
     console.log(lang)
     this.setState({
-      selectedLang: lang
+      selectedLang: lang,
+      repos: null
     })
+    this.fetchRepos(lang)
   }
 
   render() {
     return (
       <div>
         <Selected selectedLang={ this.state.selectedLang } onSelect={ this.updateLang } />
+        <Repo repos={ this.state.repos } />
       </div>
     )
   }
