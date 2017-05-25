@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types'
 const langs = ['All', 'JS', 'Ruby', 'Java', 'Python', 'HTML', 'CSS']
 
 class Popular extends Component {
@@ -42,6 +42,12 @@ function Selected (props) {
       })}
     </ul>
   )
+}
+
+// typecheck
+Selected.PropTypes = {
+  onSelect: PropTypes.func.isRequired,
+  selectedLang: PropTypes.string.isRequired
 }
 
 export default Popular;
