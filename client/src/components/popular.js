@@ -40,7 +40,9 @@ class Popular extends Component {
     return (
       <div>
         <Selected selectedLang={ this.state.selectedLang } onSelect={ this.updateLang } />
-        <Repo repos={ this.state.repos } />
+        {!this.state.repos
+          ? <p>Loading</p>
+          : <Repos repos={ this.state.repos } />}
       </div>
     )
   }
@@ -68,6 +70,47 @@ function Selected (props) {
 Selected.PropTypes = {
   onSelect: PropTypes.func.isRequired,
   selectedLang: PropTypes.string.isRequired
+}
+
+function Repos(props) {
+  console.log('repos', props.repos)
+  return (
+    <ul className='repo-list'>
+      {
+        props.repos.map((repo, idx) => {
+          return (
+            <li key={ repo.name }>
+              <RepoItem repo={ repo } rank={ idx+1 } owner={ repo.owner } />
+            </li>
+          )
+        })
+      }
+    </ul>
+  )
+}
+
+Repos.PropTypes = {
+  repos: PropTypes.array.isRequired
+}
+
+function RepoItem (props) {
+  return (
+    <div>
+      <div className='repo-item-rank'>
+        [{ props.rank }]
+      </div>
+      <ul className='repo-list-detail'>
+        <li>
+          <img className='avatar' src={ props.owner.avatar_url } alt={ 'Avatar for ' + props.owner.login } />
+        </li>
+        <li>
+          <a href={ props.repo.html_url }>{ props.repo.name }</a>
+        </li>
+        <li>@{ props.owner.login }</li>
+        <li>{ props.repo.stargazers_count } stars</li>
+      </ul>
+    </div>
+  )
 }
 
 export default Popular;
