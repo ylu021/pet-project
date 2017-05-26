@@ -28,37 +28,19 @@ class Battle extends Component {
     })
   }
 
-  handleReset = (player) => {
-    console.log('inher', player)
-    this.setState({
-      [player]: {
-        username: '',
-        img: null
-      }
-    })
-  }
-
   render() {
-    console.log('playerOne', this.state.playerOne)
     return (
-      <div>
-        <div className="battle-container">
-          {!this.state.playerOne.username
-            ? <PlayerInput id='playerOne' label='Player One' onSubmit={ this.handleSubmit } />
-            : <PlayerTile player={ this.state.playerOne } onReset={ this.handleReset.bind(null, 'playerOne') }/>
-            }
-          {!this.state.playerTwo.username
-            ? <PlayerInput id='playerTwo' label='Player Two' onSubmit={ this.handleSubmit } />
-            : <PlayerTile player={ this.state.playerTwo } onReset={ this.handleReset.bind(null, 'playerTwo') } />
-            // onreset this.bind(null) means do not call it now, since it would be called later
+      <div className="battle-container">
+        {!this.state.playerOne.username
+          ? <PlayerInput label={ 'playerOne' } presentation={ this.state.playerOne.label } onSubmit={ this.handleSubmit } />
+          // : <PlayerTile player={ this.state.playerOne }/>
+          : <div>yo</div>
           }
-        </div>
-        <div>
-          { this.state.playerOne.username && this.state.playerTwo.username
-            ? <button className='btn battle-btn'>Battle</button>
-            : null
-          }
-        </div>
+        {!this.state.playerTwo.username
+          ? <PlayerInput label={ 'playerTwo' } presentation={ this.state.playerTwo.label } onSubmit={ this.handleSubmit } />
+          // : <PlayerTile player={ this.state.playerTwo } />
+          : <div>yo</div>
+        }
       </div>
     )
   }
@@ -79,15 +61,14 @@ class PlayerInput extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.onSubmit(this.props.id, this.state.username)
-    this.setState({ username: ''})
+    this.props.onSubmit(this.props.label, this.state.username)
   }
 
   render() {
     return (
       <form onSubmit={ this.handleSubmit } className='battle-form'>
         <label className='battle-label'>
-          { this.props.label }
+          { this.props.presentation }
           <input
             id='username'
             placeholder='github username'
@@ -106,27 +87,7 @@ class PlayerInput extends Component {
 
 PlayerInput.PropTypes = {
   onSubmit: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired
-}
-
-function PlayerTile (props) {
-  return (
-    <div>
-      <div className='battle-form'>
-      <li><img className='avatar' src={ props.player.img } /></li>
-      <li><h2>{ '@'+ props.player.username }</h2></li>
-      <li><button onClick={ props.onReset }>reset</button></li>
-      </div>
-    </div>
-  )
-  //bind null so the parent do not have to go through this context confusion
-}
-
-PlayerInput.PropTypes = {
-  player: PropTypes.object.isRequired,
-  onReset: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
 }
 
 export default Battle;
